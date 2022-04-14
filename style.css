@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Rubik&display=swap');
+
+body {
+    background-color: #ffb9c1;
+    /* font-size: 1.6rem;
+    font-family: "Open Sans", sans-serif; */
+    color: #2b3e51;
+  }
+
+h2 {
+    font-size: 40px;
+}
+
+#loginbox{
+    background-color: #fff;
+    width: 350px;
+    margin: 30px auto;
+    text-align: center;
+    padding: 10px 0 30px 0;
+    border-radius: 4px;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
+    font-family: Rubik;
+}
+
+input {
+    box-sizing: border-box;
+    width: 70%;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 5px;
+    border-radius: 3px;
+  }
+
+#login{
+    background-color: #ffa5ab;
+    border-color: #f7bcc3;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+#checkpassbox{
+    width: 17px;
+    height: 17px;
+    margin-top: -5%;
+    margin-left: 30%;
+    font-size: 6px;
+
+}
