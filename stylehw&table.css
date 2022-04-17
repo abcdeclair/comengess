@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Rubik&display=swap');
+body{
+  background-color: #ffb9c1;
+  font-family: "Open Sans", sans-serif;
+}
+#work{
+    text-align: center;
+    font-size: 40px;
+    font-family: Rubik;
+
+}
+#labeltitle, #labeldate{
+  font-family: Rubik;
+  font-size: 20px;
+
+}
+#title,#senddate{
+    margin: 5px;
+    padding: 5px;
+}
+
+#addhomework{
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+    border-radius: 5px;
+    font-size: 15px;
+      font-weight: bold;
+}
+#main-table {
+    padding: 0;
+    width: 100%;
+    background: wheat;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+    overflow: hidden;
+  }
+  #main-table > thead > tr > th {
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+  }
+  #main-table td,
+  #main-table th {
+    padding: 5px 10px;
+    text-align: center;
+    border-bottom: 1px solid rgb(8, 0, 0);
+  }
+  #main-table > thead {
+    background: rgb(92, 42, 12);
+    color: white;
+  }
+  .finish{
+      color: green;
+    
+  }
+  .nfinish{
+      color: red;
+    
+  }
+  .finish,.nfinish{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .isfinishcheckbox{
+    width: 20px;
+  }
+  .binbutton{
+      background-color: rgb(255, 57, 57);
+      margin-left: 5px;
+      border:  none;
+      border-radius: 5px;
+      padding: 4px 8px;
+
+      font-size: 15px;
+      font-weight: bold;
+      color: white;
+  }
+  .finbutton{
+    margin-right    : 5px; 
+  }
