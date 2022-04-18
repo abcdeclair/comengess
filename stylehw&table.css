@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Rubik&display=swap');
 body{
-  background-color: #ffb9c1;
+  background-color: #dfd9da;
   font-family: "Open Sans", sans-serif;
 }
 #work{
     text-align: center;
     font-size: 40px;
-    font-family: Rubik;
+    font-family: Bai Jamjuree;
 
 }
 #labeltitle, #labeldate{
@@ -30,28 +31,50 @@ body{
     font-size: 15px;
       font-weight: bold;
 }
-#main-table {
-    padding: 0;
-    width: 100%;
-    background: wheat;
-    border-radius: 8px;
-    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+#table{
+    text-align: center;
+    width: 80%;
+    height: 400px;
+    font-family: Bai Jamjuree;
+    background: #fff;
+    border-radius: 4px;
+    /* box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1); */
     border-collapse: collapse;
     overflow: hidden;
+
+}
+
+.used{
+  background-color: #fe959c;
+}
+#main-table {
+    
+    text-align: center;
+    width: 80%;
+    font-family: Bai Jamjuree;
+    background: #fff;
+    border-radius: 4px;
+    /* box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1); */
+    border-collapse: collapse;
+    overflow: hidden;
+
   }
   #main-table > thead > tr > th {
     font-weight: bold;
     text-align: center;
     font-size: 30px;
+    
   }
   #main-table td,
   #main-table th {
     padding: 5px 10px;
     text-align: center;
-    border-bottom: 1px solid rgb(8, 0, 0);
+    /* border-bottom: 1px solid rgb(8, 0, 0); */
   }
   #main-table > thead {
-    background: rgb(92, 42, 12);
+    background: #fe959c;
+    padding: 12px 15px;
     color: white;
   }
   .finish{
@@ -70,7 +93,7 @@ body{
     width: 20px;
   }
   .binbutton{
-      background-color: rgb(255, 57, 57);
+      background-color: rgb(252, 130, 130);
       margin-left: 5px;
       border:  none;
       border-radius: 5px;

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Rubik&display=swap');
 
 body {
-    background-color: #ffb9c1;
+    background-color: #c3bcbd;
     /* font-size: 1.6rem;
     font-family: "Open Sans", sans-serif; */
     color: #2b3e51;
@@ -33,7 +33,7 @@ input {
   }
 
 #login{
-    background-color: #ffa5ab;
+    background-color: #ffafb5;
     border-color: #f7bcc3;
     color: #fff;
     font-family: "Open Sans", sans-serif;
