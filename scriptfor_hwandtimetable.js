@@ -277,15 +277,14 @@ function createinputforTT(){
         additem()
     }
     buttonfortt.innerText="Add"
-
-    slot_for_timetable.appendChild(subject)
     slot_for_timetable.appendChild(label)
-    slot_for_timetable.appendChild(inputday)
+    slot_for_timetable.appendChild(subject)
     slot_for_timetable.appendChild(labelday)
-    slot_for_timetable.appendChild(inputstart)
+    slot_for_timetable.appendChild(inputday)
     slot_for_timetable.appendChild(labelstart)
-    slot_for_timetable.appendChild(inputend)
+    slot_for_timetable.appendChild(inputstart)
     slot_for_timetable.appendChild(labelend)
+    slot_for_timetable.appendChild(inputend)
     slot_for_timetable.appendChild(buttonfortt)
 }
 
@@ -347,7 +346,7 @@ function additem() {
         alert("already used")
         return
     }
-    console.log(start.value)
+    console.log(typeof (start.value))
     datatable.push({
         "subject": subject.value,
         "days": days.value,
@@ -374,7 +373,7 @@ function resettable() {
 }
 function find(checkstart, checkend, checkday) {
     for (let i = 0; i < datatable.length; i++) {
-        if (checkday != datatable[i].days || checkstart > datatable[i].end || checkend < datatable[i].start) {
+        if (parseInt(checkday) != parseInt(datatable[i].days) || parseInt(checkstart) > parseInt(datatable[i].end) || parseInt(checkend) < parseInt(datatable[i].start)) {
 
         } else {
             return true
