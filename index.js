@@ -33,8 +33,7 @@ import {
 
 const db = getFirestore();
 const users_ref = collection(db, 'users');
-
-//  Access data test
+const users = await getDocs(users_ref);
 // const items = await getDocs(users_ref);
 // let i;
 // items.docs.forEach(element => {
@@ -47,41 +46,106 @@ const users_ref = collection(db, 'users');
 //   console.log(e.data());
 // })
 
-let form = document.querySelector('#loginForm');
+//let form = document.querySelector('#loginForm');
 
-function myFunction() {
+let slot_for_login = document.createElement("div")
+slot_for_login.id = "loginbox"
+
+function createHeadForLogin(){
+  let head = document.createElement("h2")
+  head.innerText = "Login"
+  head.id = "headLogin"
+  slot_for_login.appendChild(head)
+
+}
+
+// function loginClick() {
+//   var x = document.getElementById("password");
+//   if (x.type === "password") {
+//     x.type = "text";
+//   } else {
+//     x.type = "password";
+//   }
+// }
+
+function createFormForLogin(){
+  let form = document.createElement("form")
+  let username = document.createElement("input")
+  username.id = "username"
+  username.name = "username"
+  username.placeholder = "Username"
+  username.type = "text"
+  username.required
+
+  form.appendChild(username)
+
+  let password = document.createElement("input")
+  password.id = "password"
+  password.name = "password"
+  password.placeholder = "Password"
+  password.type = "password"
+  password.required
+
+  form.appendChild(password)
+
+  let checkLogin = document.createElement("input")
+  checkLogin.id = "checkpassbox"
+  checkLogin.type = "checkbox"
+  checkLogin.onclick = function(){
     var x = document.getElementById("password");
     if (x.type === "password") {
       x.type = "text";
     } else {
       x.type = "password";
     }
+  }
+
+  form.appendChild(checkLogin)
+
+  let login = document.createElement("input")
+  login.id = "login"
+  login.type = "submit"
+  login.value = "LOGIN"
+  login.onclick = function(){
+    var isTrue = false;
+    if(users){
+      users.docs.forEach(element => {
+        if(username.value == element.data().user && password.value == element.data().pass){
+          isTrue = true
+        }
+      });
+      
+    }
+    if(password.value == "" || username.value == ""){
+      window.alert('please enter username or password')
+    }
+     else if(isTrue){
+      window.alert('รหัสถูกต้อง')
+    }
+    else{
+      window.alert('Username or password incorrect')
+    }
+    username.value = ""
+    password.value = ""
+  }
+  form.appendChild(login)
+  slot_for_login.appendChild(form)
+
+
+
+
+
+
+
+
+
 }
 
-const users = await getDocs(users_ref);
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const u = document.getElementById("username").value; 
-  const p = document.getElementById("password").value;
-  //console.log(u);
-  //console.log(p);
-  var isTrue = false;
-  if(users){
-    users.docs.forEach(element => {
-    if(u == element.data().user && p == element.data().pass){
-      isTrue = true;
-    }
-    });
-  }
-  if(isTrue){
-    window.alert('รหัสถูกต้อง');
-  }else{
-    window.alert('รหัสผิด');
-  }
-  document.getElementById("username").value = "";
-  document.getElementById("password").value = "";
-  
-})
+function initLogin(){
+  createHeadForLogin()
+  createFormForLogin()
+  document.body.appendChild(slot_for_login)
+}
 
-window.myFunction = myFunction;
+initLogin()
