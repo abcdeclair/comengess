@@ -34,17 +34,20 @@ import {
 const db = getFirestore();
 const users_ref = collection(db, 'users');
 
-const items = await getDocs(users_ref);
-let i;
-items.docs.forEach(element => {
-  console.log(element.data());
-  i = element.id;
-});
-const hw_ref = collection(db,`users/${i}/homework`);
-const hw = await getDocs(hw_ref);
-hw.docs.forEach(e => {
-  console.log(e.data());
-})
+//  Access data test
+// const items = await getDocs(users_ref);
+// let i;
+// items.docs.forEach(element => {
+//   console.log(element.data());
+//   i = element.id;
+// });
+// const hw_ref = collection(db,`users/${i}/homework`);
+// const hw = await getDocs(hw_ref);
+// hw.docs.forEach(e => {
+//   console.log(e.data());
+// })
+
+let form = document.querySelector('#loginForm');
 
 function myFunction() {
     var x = document.getElementById("password");
@@ -53,6 +56,32 @@ function myFunction() {
     } else {
       x.type = "password";
     }
+}
+
+const users = await getDocs(users_ref);
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const u = document.getElementById("username").value; 
+  const p = document.getElementById("password").value;
+  //console.log(u);
+  //console.log(p);
+  var isTrue = false;
+  if(users){
+    users.docs.forEach(element => {
+    if(u == element.data().user && p == element.data().pass){
+      isTrue = true;
+    }
+    });
   }
+  if(isTrue){
+    window.alert('รหัสถูกต้อง');
+  }else{
+    window.alert('รหัสผิด');
+  }
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+  
+})
 
 window.myFunction = myFunction;
