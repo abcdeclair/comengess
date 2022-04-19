@@ -34,6 +34,17 @@ import {
 const db = getFirestore();
 const users_ref = collection(db, 'users');
 
+const items = await getDocs(users_ref);
+let i;
+items.docs.forEach(element => {
+  console.log(element.data());
+  i = element.id;
+});
+const hw_ref = collection(db,`users/${i}/homework`);
+const hw = await getDocs(hw_ref);
+hw.docs.forEach(e => {
+  console.log(e.data());
+})
 
 function myFunction() {
     var x = document.getElementById("password");
@@ -43,3 +54,5 @@ function myFunction() {
       x.type = "password";
     }
   }
+
+window.myFunction = myFunction;
