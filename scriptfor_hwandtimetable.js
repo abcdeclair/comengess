@@ -298,14 +298,15 @@ function gentable() {
     let th1 = document.createElement("th")
     th1.innerText = "DAYS\\TIME"
     hr.appendChild(th1)
-    for (let i = 0; i < Ltime.length; i++) {
+    for (let i = 0; i < Ltime.length-1; i++) {
         let th_i = document.createElement("th")
-        th_i.innerText = Ltime[i]
+        th_i.innerText = Ltime[i]+"-"+Ltime[i+1]
         hr.appendChild(th_i)
     }
 
     thead.appendChild(hr)
     table.appendChild(thead)
+    
 
     var used = 0
     for (let i = 1; i <= 5; i++) {
@@ -317,10 +318,10 @@ function gentable() {
         while (counter <= Ltime.length + 1) {
             let cell_i = document.createElement("td")
             if (used < datatable.length && datatable[used].days == i && counter >= datatable[used].start && counter <= datatable[used].end) {
-                cell_i.colSpan = datatable[used].end - datatable[used].start + 1
+                cell_i.colSpan = datatable[used].end - datatable[used].start 
                 cell_i.innerText = datatable[used].subject
                 cell_i.value = used
-                counter += datatable[used].end - datatable[used].start + 1
+                counter += datatable[used].end - datatable[used].start 
                 cell_i.className = "used"
                 cell_i.onclick = function () {
                     datatable.splice(cell_i.value, 1)
@@ -342,6 +343,14 @@ function additem() {
     var days = document.getElementById("days")
     var start = document.getElementById("start")
     var end = document.getElementById("end")
+    if(subject.value.length==0){
+        alert("subject mustn't be empty")
+        return
+    }
+    if(parseInt(start.value)>=parseInt(end.value)){
+        alert("start must come before end")
+        return
+    }
     if (find(start.value, end.value, days.value)) {
         alert("already used")
         return
@@ -373,7 +382,7 @@ function resettable() {
 }
 function find(checkstart, checkend, checkday) {
     for (let i = 0; i < datatable.length; i++) {
-        if (parseInt(checkday) != parseInt(datatable[i].days) || parseInt(checkstart) > parseInt(datatable[i].end) || parseInt(checkend) < parseInt(datatable[i].start)) {
+        if (parseInt(checkday) != parseInt(datatable[i].days) || parseInt(checkstart) >= parseInt(datatable[i].end) || parseInt(checkend) < parseInt(datatable[i].start)) {
 
         } else {
             return true
