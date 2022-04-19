@@ -100,7 +100,17 @@ function createFormForLogin(){
     }
   }
 
+  let br = document.createElement("br")
+  form.appendChild(br)
+  let br1 = document.createElement("br")
+  form.appendChild(br1)
+
+  let labelBox = document.createElement("label")
+  labelBox.innerText = "Show password"
+  labelBox.htmlFor = "checkLogin"
+
   form.appendChild(checkLogin)
+  form.appendChild(labelBox)
 
   let login = document.createElement("input")
   login.id = "login"
