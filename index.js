@@ -92,7 +92,7 @@ function createbuttonforhw(uid) {
   };
   slot_for_homework.appendChild(button);
 }
-async function createtableforhw(uid) {
+async function createtableforhw(uid) {  
   let table = document.createElement("table");
   table.id = "main-table";
   let thead = document.createElement("thead");
@@ -171,7 +171,7 @@ function initworkforhw(uid) {
   createheadforhw();
   createinputforhw();
   createbuttonforhw(uid);
-  createtableforhw(uid);
+  createtableforhw(uid);  
   document.body.appendChild(slot_for_homework);
   //resettableforhw(uid)
 }
@@ -183,7 +183,7 @@ async function additemforhw(uid) {
     alert("please insert title and date");
     return;
   }
-  // alldata.push({
+// alldata.push({
   //   title: title.value,
   //   senddate: senddate.value,
   //   isfinish: false,
@@ -368,10 +368,14 @@ function createinputforTT() {
 }
 
 function gentable() {
+  let tablediv = document.createElement("div")
+  tablediv.id = "tabdiv"
+
   let table = document.createElement("table");
   table.id = "table";
   let thead = document.createElement("thead");
   let hr = document.createElement("tr");
+  thead.id = "timehead"
   let th1 = document.createElement("th");
   th1.innerText = "DAYS\\TIME";
   hr.appendChild(th1);
@@ -416,7 +420,8 @@ function gentable() {
     }
     table.appendChild(row);
   }
-  slot_for_timetable.appendChild(table);
+  tablediv.appendChild(table)
+  slot_for_timetable.appendChild(tablediv);
 }
 function additem() {
   var subject = document.getElementById("subject");
@@ -544,6 +549,10 @@ function createFormForRegister() {
   regBtn.style.cursor = "pointer";
   regBtn.onclick = function() {
     currentPage = "login";
+    fName.value=""
+    lName.value=""
+    userReg.value=""
+    passReg.value= ""
     document.body.innerHTML = "";
     initLogin();
     

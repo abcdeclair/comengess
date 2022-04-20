@@ -7,12 +7,17 @@ body {
     /* font-size: 1.6rem;
     font-family: "Open Sans", sans-serif; */
     color: #2b3e51;
+    text-align: center;
   }
 
 h2 {
     font-size: 40px;
 }
 
+#tabdiv{
+  text-align: center;
+  margin-left: 5%;
+}
 #loginbox, #registerbox{
     background-color: #fff;
     width: 350px;
@@ -82,20 +87,26 @@ h2 {
 }
 
 #table{
-    text-align: center;
-    width: 80%;
-    height: 400px;
+    
+    width: 95%;
+    height: 450px;
     font-family: Bai Jamjuree;
+    font-size: 15px;
     background: #fff;
+    margin-top: 1%;
     border-radius: 4px;
     /* box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1); */
-    border-collapse: collapse;
-    overflow: hidden;
+    /* border-collapse: collapse; */
 
+}
+
+#timehead{
 }
 
 .used{
   background-color: #fe959c;
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+  
 }
 #main-table {
     
