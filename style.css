@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Rubik&display=swap');
 
 body {
-    background-color: #c3bcbd;
+    background-color: #ded8d9;
     /* font-size: 1.6rem;
     font-family: "Open Sans", sans-serif; */
     color: #2b3e51;
@@ -131,7 +131,10 @@ h2 {
 #main-table {
     
     text-align: center;
-    width: 80%;
+    margin-top: 1%;
+    margin-left: 5%;
+    margin-bottom: 10%;
+    width: 90%;
     font-family: Bai Jamjuree;
     background: #fff;
     border-radius: 4px;
@@ -144,6 +147,7 @@ h2 {
     font-weight: bold;
     text-align: center;
     font-size: 30px;
+    height: 50px;
     
   }
   #main-table td,
@@ -151,6 +155,7 @@ h2 {
     padding: 5px 10px;
     text-align: center;
     /* border-bottom: 1px solid rgb(8, 0, 0); */
+    height: 50px;
   }
   #main-table > thead {
     background: #fe959c;
@@ -158,11 +163,11 @@ h2 {
     color: white;
   }
   .finish{
-      color: green;
+      color: rgb(107, 191, 129);
     
   }
   .nfinish{
-      color: red;
+      color: rgb(247, 106, 93);
     
   }
   .finish,.nfinish{
