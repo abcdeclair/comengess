@@ -51,6 +51,7 @@ const users = await getDocs(users_ref);
 // main page
 
 var currentPage = "login";
+var start = true;
 var alldata = [];
 let slot_for_homework = document.createElement("div");
 
@@ -496,6 +497,12 @@ function createFormForRegister() {
   regBtn.type = "submit";
   regBtn.value = "REGISTER";
   regBtn.style.cursor = "pointer";
+  regBtn.onclick = function() {
+    currentPage = "login";
+    document.body.innerHTML = "";
+    initLogin();
+    
+  }
 
   formReg.appendChild(regBtn);
   slot_for_register.appendChild(formReg)
@@ -624,11 +631,19 @@ function initLogin() {
   document.body.appendChild(slot_for_login);
 }
 
-if (currentPage === "login") {
+if(start){
   initLogin();
-} else if (currentPage === "main") {
-  init();
+  start = false;
 }
-else{
-    initReg();
-}
+// if(start){
+//   if (currentPage === "login") {
+//     initLogin();
+//   } else if (currentPage === "main") {
+//     init();
+//   }
+//   else{
+//       initReg();
+//   }
+//   start = false;
+// }
+
