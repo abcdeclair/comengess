@@ -508,10 +508,10 @@ function createFormForRegister() {
   slot_for_register.appendChild(formReg)
 
 }
-
+createHeadForRegister()
+createFormForRegister()
 function initReg(){
-    createHeadForRegister()
-    createFormForRegister()
+  
     document.body.appendChild(slot_for_register)
   }
 // -------------------------------------------------------------------------------------------
@@ -625,9 +625,10 @@ function createFormForLogin() {
   slot_for_login.appendChild(form);
 }
 
+createHeadForLogin();
+createFormForLogin();
 function initLogin() {
-  createHeadForLogin();
-  createFormForLogin();
+  
   document.body.appendChild(slot_for_login);
 }
 
