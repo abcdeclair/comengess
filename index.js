@@ -34,15 +34,17 @@ import {
 const db = getFirestore();
 const users_ref = collection(db, "users");
 const users = await getDocs(users_ref);
+
 // const items = await getDocs(users_ref);
 // let i;
 // items.docs.forEach(element => {
 //   console.log(element.data());
 //   i = element.id;
 // });
-// const hw_ref = collection(db,`users/${i}/homework`);
-// const hw = await getDocs(hw_ref);
-// hw.docs.forEach(e => {
+// const hw1_ref = collection(db,`users/${i}/homework`);
+// const hw1 = await getDocs(hw1_ref);
+// console.log(hw1)
+// hw1.docs.forEach(e => {
 //   console.log(e.data());
 // })
 
@@ -81,16 +83,16 @@ function createinputforhw() {
   slot_for_homework.appendChild(date);
 }
 
-function createbuttonforhw() {
+function createbuttonforhw(uid) {
   let button = document.createElement("button");
   button.innerText = "Add";
   button.id = "addhomework";
   button.onclick = function () {
-    additemforhw();
+    additemforhw(uid);
   };
   slot_for_homework.appendChild(button);
 }
-function createtableforhw() {
+async function createtableforhw(uid) {
   let table = document.createElement("table");
   table.id = "main-table";
   let thead = document.createElement("thead");
@@ -110,15 +112,29 @@ function createtableforhw() {
   thead.appendChild(row);
   table.appendChild(thead);
 
+  const hw_ref = collection(db,`users/${uid}/homework`);
+  const hw = await getDocs(hw_ref);
+  hw.docs.forEach(e => {
+    //console.log(e.data());
+    alldata.push({
+      title: e.data().work,
+      senddate: e.data().date,
+      isfinish: e.data().isFinish,
+      id: e.id
+    });
+  })
+  sortdataforhw();
+  console.log(alldata)
   for (let i = 0; i < alldata.length; i++) {
     let r = document.createElement("tr");
     let d1 = document.createElement("td");
     let d2 = document.createElement("td");
     let d3 = document.createElement("td");
     let d4 = document.createElement("td");
+    r.id = alldata[i].id;
 
-    let finishbutton = createfinishbuttonforhw(i);
-    let removebutton = createremovebuttonforhw(i);
+    let finishbutton = createfinishbuttonforhw(i,uid,r.id);
+    let removebutton = createremovebuttonforhw(i,uid,r.id);
 
     d1.innerText = "" + alldata[i].title;
     d2.innerText = "" + alldata[i].senddate;
@@ -139,35 +155,53 @@ function createtableforhw() {
 
   slot_for_homework.appendChild(table);
 }
-createheadforhw();
-createinputforhw();
-createbuttonforhw();
-createtableforhw();
-function initworkforhw() {
-  
+
+function initworkforhw(uid) {
+  //push homework data to alldata
+  // const hw_ref = collection(db,`users/${uid}/homework`);
+  // const hw = await getDocs(hw_ref);
+  // hw.docs.forEach(e => {
+  //   //console.log(e.data());
+  //   alldata.push({
+  //     title: e.data().work,
+  //     senddate: e.data().date,
+  //     isfinish: e.data().isFinish,
+  //   });
+  // })
+  createheadforhw();
+  createinputforhw();
+  createbuttonforhw(uid);
+  createtableforhw(uid);
   document.body.appendChild(slot_for_homework);
-  resettableforhw()
+  //resettableforhw(uid)
 }
-function additemforhw() {
+async function additemforhw(uid) {
+  const hw_ref = collection(db,`users/${uid}/homework`);
   var title = document.getElementById("title");
   var senddate = document.getElementById("senddate");
   if (senddate.value.length == 0 || title.value.length == 0) {
     alert("please insert title and date");
     return;
   }
-  alldata.push({
-    title: title.value,
-    senddate: senddate.value,
-    isfinish: false,
-  });
+  // alldata.push({
+  //   title: title.value,
+  //   senddate: senddate.value,
+  //   isfinish: false,
+  // });
+  addDoc(hw_ref,{
+    work : title.value,
+    date : senddate.value,
+    isFalse : false
+  })
   title.value = "";
-  sortdataforhw();
-  resettableforhw();
+  alldata = [];
+  //sortdataforhw();
+  resettableforhw(uid);
 }
-function resettableforhw() {
+function resettableforhw(uid) {
   const table = document.getElementById("main-table");
   table.remove();
-  createtableforhw();
+  createtableforhw(uid);
 }
 
 function sortdataforhw() {
@@ -187,29 +221,37 @@ function sortdataforhw() {
   });
 }
 
-function createfinishbuttonforhw(idx) {
+function createfinishbuttonforhw(idx,uid,rid) {
   let checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.className = "isfinishcheckbox";
   checkbox.id = "" + idx;
-  checkbox.onclick = function () {
+  checkbox.onclick = async function () {
     alldata[parseInt(checkbox.id)].isfinish =
       !alldata[parseInt(checkbox.id)].isfinish;
-    sortdataforhw();
-    resettableforhw();
+    const ref = doc(db,`users/${uid}/homework/${rid}`);
+    await updateDoc(ref,{
+      isFinish : alldata[parseInt(checkbox.id)].isfinish
+    })
+    //sortdataforhw();
+    alldata = [];
+    resettableforhw(uid);
   };
   return checkbox;
 }
-function createremovebuttonforhw(idx) {
+function createremovebuttonforhw(idx,uid,rid) {
   let removebutton = document.createElement("button");
   removebutton.innerText = "Bin";
   removebutton.value = idx;
   removebutton.className = "binbutton";
-  removebutton.onclick = function () {
+  removebutton.onclick = async function () {
+    const ref = doc(db,`users/${uid}/homework/${rid}`)
+    await deleteDoc(ref)
     alldata.splice(removebutton.value, 1);
     var row = this.parentNode.parentNode;
     row.remove();
-    resettableforhw();
+    alldata = [];
+    resettableforhw(uid);
   };
   return removebutton;
 }
@@ -439,9 +481,9 @@ function initforTT() {
   resettable()
 }
 
-function init() {
+function init(u) {
   initforTT();
-  initworkforhw();
+  initworkforhw(u);
 }
 // -------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------
@@ -591,16 +633,19 @@ function createFormForLogin() {
   login.style.cursor = "pointer";
   login.onclick = function () {
     var isTrue = false;
+    let user_id;
     if (users) {
       users.docs.forEach((element) => {
         if (
           username.value == element.data().user &&
           password.value == element.data().pass
         ) {
+          user_id = element.id;
           isTrue = true;
         }
       });
     }
+
     if (password.value == "" || username.value == "") {
       //   window.alert('please enter username or password')
     } else if (isTrue) {
@@ -608,7 +653,7 @@ function createFormForLogin() {
       password.value = "";
       window.alert("รหัสถูกต้อง");
       document.body.innerHTML = "";
-      init();
+      init(user_id);
       currentPage = "main";
     } else {
       window.alert("Username or password incorrect");
