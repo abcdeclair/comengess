@@ -408,6 +408,7 @@ function gentable() {
         cell_i.value = used;
         counter += datatable[used].end - datatable[used].start;
         cell_i.className = "used";
+        cell_i.id = alldays[i-1];
         cell_i.onclick = function () {
           datatable.splice(cell_i.value, 1);
           resettable();

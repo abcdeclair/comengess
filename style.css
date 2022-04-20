@@ -104,9 +104,29 @@ h2 {
 }
 
 .used{
-  background-color: #fe959c;
+  
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
   
+}
+
+#MON{
+  background-color: #fff07b;
+}
+
+#TUE{
+  background-color: #ffa4c4;
+}
+
+#WED{
+  background-color: #a7e59e;
+}
+
+#THU{
+  background-color: #f8b88a;
+}
+
+#FRI{
+  background-color: #a9e1ff;
 }
 #main-table {
     
