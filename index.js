@@ -139,12 +139,14 @@ function createtableforhw() {
 
   slot_for_homework.appendChild(table);
 }
+createheadforhw();
+createinputforhw();
+createbuttonforhw();
+createtableforhw();
 function initworkforhw() {
-  createheadforhw();
-  createinputforhw();
-  createbuttonforhw();
-  createtableforhw();
+  
   document.body.appendChild(slot_for_homework);
+  resettableforhw()
 }
 function additemforhw() {
   var title = document.getElementById("title");
@@ -429,11 +431,12 @@ function find(checkstart, checkend, checkday) {
   return false;
 }
 
-function initforTT() {
-  createheadforTT();
+createheadforTT();
   createinputforTT();
   gentable();
+function initforTT() {
   document.body.appendChild(slot_for_timetable);
+  resettable()
 }
 
 function init() {
