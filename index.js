@@ -470,7 +470,7 @@ function find(checkstart, checkend, checkday) {
     if (
       parseInt(checkday) != parseInt(datatable[i].days) ||
       parseInt(checkstart) >= parseInt(datatable[i].end) ||
-      parseInt(checkend) < parseInt(datatable[i].start)
+      parseInt(checkend) <= parseInt(datatable[i].start)
     ) {
     } else {
       return true;
