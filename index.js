@@ -566,6 +566,16 @@ function createFormForRegister() {
   }
 
   formReg.appendChild(regBtn);
+  let backlogin = document.createElement("p");
+  backlogin.innerText = "back to login";
+  backlogin.style.cursor = "pointer"
+  backlogin.onclick = function() {
+      currentPage = "login"
+      document.body.innerHTML = ""
+      initLogin()
+  }
+  formReg.appendChild(backlogin)
+
   slot_for_register.appendChild(formReg)
 
 }
@@ -696,9 +706,13 @@ function initLogin() {
   document.body.appendChild(slot_for_login);
 }
 
-if(start){
+if(currentPage=="login"){
   initLogin();
   start = false;
+}
+
+if(currentPage=="main"){
+  init();
 }
 // if(start){
 //   if (currentPage === "login") {
