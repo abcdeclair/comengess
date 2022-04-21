@@ -520,8 +520,8 @@ function createFormForRegister() {
   lName.id = "lastname";
   lName.name = "lastname";
   lName.placeholder = "Last name";
-  lName.type = "text";
   lName.required = "true";
+  lName.type = "text";
 
   formReg.appendChild(lName);
 
@@ -549,13 +549,19 @@ function createFormForRegister() {
   regBtn.value = "REGISTER";
   regBtn.style.cursor = "pointer";
   regBtn.onclick = function() {
-    currentPage = "login";
-    fName.value=""
-    lName.value=""
-    userReg.value=""
-    passReg.value= ""
-    document.body.innerHTML = "";
-    initLogin();
+    if(fName.value== "" || lName.value== "" || userReg.value == "" || passReg.value == ""){
+
+    }
+    else{
+      currentPage = "login";
+      fName.value=""
+      lName.value=""
+      userReg.value=""
+      passReg.value= ""
+      document.body.innerHTML = "";
+      initLogin();
+
+    }
     
   }
 
