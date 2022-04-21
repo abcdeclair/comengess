@@ -191,7 +191,7 @@ async function additemforhw(uid) {
   addDoc(hw_ref,{
     work : title.value,
     date : senddate.value,
-    isFalse : false
+    isFinish : false
   })
   title.value = "";
   alldata = [];
@@ -504,7 +504,7 @@ function createHeadForRegister() {
   slot_for_register.appendChild(headReg);
 }
 
-function createFormForRegister() {
+async function createFormForRegister() {
   let formReg = document.createElement("form");
 
   let fName = document.createElement("input");
@@ -553,6 +553,13 @@ function createFormForRegister() {
 
     }
     else{
+      addDoc(users_ref,{
+        firstName : fName.value,
+        lastName : lName.value,
+        user: userReg.value,
+        pass: passReg.value
+      })
+      
       currentPage = "login";
       fName.value=""
       lName.value=""
