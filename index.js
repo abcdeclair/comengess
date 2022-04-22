@@ -394,8 +394,9 @@ function gentable() {
     let row = document.createElement("tr");
     let dayname = document.createElement("td");
     dayname.innerText = alldays[i - 1];
+    dayname.id=alldays[i-1]
     row.appendChild(dayname);
-    while (counter <= Ltime.length + 1) {
+    while (counter <= Ltime.length) {
       let cell_i = document.createElement("td");
       if (
         used < datatable.length &&
