@@ -4,8 +4,7 @@
 
 body {
     background-color: #ded8d9;
-    /* font-size: 1.6rem;
-    font-family: "Open Sans", sans-serif; */
+    font-family: Bai Jamjuree;
     color: #2b3e51;
     text-align: center;
   }
@@ -100,7 +99,9 @@ h2 {
 
 }
 
-#timehead{
+#table > thead{
+  background-color: #cac8ca;
+
 }
 
 .used{
