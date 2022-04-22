@@ -325,7 +325,7 @@ function createheadforTT() {
   x.innerText = "Time Table";
   slot_for_timetable.appendChild(x);
 }
-function createinputforTT() {
+function createinputforTT(uid) {
   let subject = document.createElement("input");
   subject.id = "subject";
 
@@ -376,7 +376,7 @@ function createinputforTT() {
   let buttonfortt = document.createElement("button");
   buttonfortt.id = "addsubjectbutton";
   buttonfortt.onclick = function () {
-    additem();
+    additem(uid);
   };
   buttonfortt.innerText = "Add";
   slot_for_timetable.appendChild(label);
@@ -390,7 +390,7 @@ function createinputforTT() {
   slot_for_timetable.appendChild(buttonfortt);
 }
 
-function gentable() {
+async function gentable(uid) {
   let tablediv = document.createElement("div")
   tablediv.id = "tabdiv"
 
@@ -410,6 +410,22 @@ function gentable() {
 
   thead.appendChild(hr);
   table.appendChild(thead);
+
+  datatable = []
+
+  const tb_ref = collection(db,`users/${uid}/timetable`);
+  const tb = await getDocs(tb_ref);
+  tb.docs.forEach(e => {
+    //console.log(e.data());
+    datatable.push({
+      subject: e.data().subject,
+      days: e.data().day,
+      start: e.data().start,
+      end: e.data().end,
+      id: e.id
+    });
+  })
+  sortdata();
 
   var used = 0;
   for (let i = 1; i <= 5; i++) {
@@ -433,9 +449,14 @@ function gentable() {
         counter += datatable[used].end - datatable[used].start;
         cell_i.className = "used";
         cell_i.id = alldays[i-1];
-        cell_i.onclick = function () {
-          datatable.splice(cell_i.value, 1);
-          resettable();
+        //console.log(used)
+        const idc = datatable[used].id
+        cell_i.onclick = async function () {
+          const ref = doc(db,`users/${uid}/timetable/${idc}`)
+          await deleteDoc(ref)
+          //datatable.splice(cell_i.value, 1);
+          //datatable = [];
+          resettable(uid);
         };
         used++;
       } else {
@@ -448,7 +469,7 @@ function gentable() {
   tablediv.appendChild(table)
   slot_for_timetable.appendChild(tablediv);
 }
-function additem() {
+async function additem(uid) {
   var subject = document.getElementById("subject");
   var days = document.getElementById("days");
   var start = document.getElementById("start");
@@ -465,15 +486,26 @@ function additem() {
     alert("already used");
     return;
   }
-  console.log(typeof start.value);
-  datatable.push({
+  // console.log(typeof start.value);
+  // console.log(subject.value)
+  // console.log(days.value)
+  // console.log(start.value)
+  // datatable.push({
+  //   subject: subject.value,
+  //   days: days.value,
+  //   start: start.value,
+  //   end: end.value,
+  // });
+  const tb_ref = collection(db,`users/${uid}/timetable`);
+  addDoc(tb_ref,{
     subject: subject.value,
-    days: days.value,
+    day: days.value,
     start: start.value,
-    end: end.value,
-  });
+    end: end.value
+  })
+  //datatable = [];
   sortdata();
-  resettable();
+  resettable(uid);
 }
 
 function sortdata() {
@@ -484,10 +516,10 @@ function sortdata() {
     return a.days - b.days;
   });
 }
-function resettable() {
+function resettable(uid) {
   var table = document.getElementById("table");
   table.remove();
-  gentable();
+  gentable(uid);
 }
 function find(checkstart, checkend, checkday) {
   for (let i = 0; i < datatable.length; i++) {
@@ -503,17 +535,18 @@ function find(checkstart, checkend, checkday) {
   return false;
 }
 
-createheadforTT();
-  createinputforTT();
-  gentable();
-function initforTT() {
+
+function initforTT(u) {
+  createheadforTT();
+  createinputforTT(u);
+  gentable(u);
   document.body.appendChild(slot_for_timetable);
-  resettable()
+  //resettable()
 }
 
 function init(u) {
   createnavbar();
-  initforTT();
+  initforTT(u);
   initworkforhw(u);
 }
 // -------------------------------------------------------------------------------------------
