@@ -57,6 +57,29 @@ var start = true;
 var alldata = [];
 let slot_for_homework = document.createElement("div");
 
+function createnavbar(){
+  let div = document.createElement("div");
+  div.id = "navbar";
+  let label = document.createElement("paragraph");
+  label.id = "tabwork";
+  label.innerText = "TabWork";
+  let hello = document.createElement("paragraph");
+  hello.id = "hello";
+  hello.innerText = "HELLO -->"
+  let name = document.createElement("paragraph");
+  name.id = "name";
+  name.innerText = "jack";
+  let logout = document.createElement("button");
+  logout.id = "logout";
+  logout.innerText = "logout";
+  div.appendChild(label);
+  div.appendChild(hello);
+  div.appendChild(name);
+  div.appendChild(logout);
+  document.body.appendChild(div);
+
+}
+
 function createheadforhw() {
   let header = document.createElement("h2");
   header.innerText = "WORK";
@@ -489,6 +512,7 @@ function initforTT() {
 }
 
 function init(u) {
+  createnavbar();
   initforTT();
   initworkforhw(u);
 }

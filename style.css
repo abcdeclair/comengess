@@ -13,6 +13,45 @@ h2 {
     font-size: 40px;
 }
 
+#navbar{
+  background-color: #ff6b84;
+  font-family: Bai Jamjuree;
+  color: #2b3e51;
+  padding: 10,10,10,10;
+}
+
+#tabwork{
+  font-family: Bai Jamjuree;
+  color: #2b3e51;
+  text-align: left;
+  font-size: 2cm;
+}
+
+#hello{
+  font-family: Bai Jamjuree;
+  color: #2b3e51;
+  font-size: 1cm;
+  text-align: right;
+}
+
+#name{
+  font-family: Bai Jamjuree;
+  color: #2b3e51;
+  font-size: 1cm;
+  text-align: right;
+}
+
+#logout{
+  background-color: #f29e9e; 
+  border: none;
+  color: rgb(252, 252, 252);
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px; 
+}
+
 #tabdiv{
   text-align: center;
   margin-left: 5%;
