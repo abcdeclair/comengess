@@ -56,7 +56,7 @@ var currentPage = "login";
 var start = true;
 var alldata = [];
 let slot_for_homework = document.createElement("div");
-
+slot_for_homework.id="slot_for_homework"
 function createnavbar(){
   let div = document.createElement("div");
   div.id = "navbar";
@@ -72,6 +72,15 @@ function createnavbar(){
   let logout = document.createElement("button");
   logout.id = "logout";
   logout.innerText = "logout";
+  logout.onclick=function(){
+    currentPage = "login";
+    document.body.innerHTML = "";
+    alldata =[]
+    datatable=[]
+    slot_for_homework.innerHTML=""  
+    slot_for_timetable.innerHTML=""
+    initLogin();
+  }
   div.appendChild(label);
   div.appendChild(hello);
   div.appendChild(name);
@@ -280,7 +289,7 @@ function createremovebuttonforhw(idx,uid,rid) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 let slot_for_timetable = document.createElement("div");
-
+slot_for_timetable.id="slot_for_timetable"
 var datatable = [];
 const alldays = ["MON", "TUE", "WED", "THU", "FRI"];
 const Ltime = [
@@ -503,6 +512,7 @@ async function additem(uid) {
     start: start.value,
     end: end.value
   })
+  subject.value=""
   //datatable = [];
   sortdata();
   resettable(uid);
