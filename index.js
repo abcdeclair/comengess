@@ -41,11 +41,11 @@ var currentPage = "login";
 var start = true;
 var alldata = [];
 let slot_for_homework = document.createElement("div");
-slot_for_homework.id="slot_for_homework"
+slot_for_homework.id = "slot_for_homework"
 let slot_for_navbar = document.createElement("div");
-slot_for_navbar.id="slot_for_navbar"
-async function createnavbar(uid){
-  const user_ref = doc(db,`users/${uid}`);
+slot_for_navbar.id = "slot_for_navbar"
+async function createnavbar(uid) {
+  const user_ref = doc(db, `users/${uid}`);
   const user = await getDoc(user_ref)
   let div = document.createElement("div");
   div.id = "navbar";
@@ -61,16 +61,16 @@ async function createnavbar(uid){
   let logout = document.createElement("button");
   logout.id = "logout";
   logout.innerText = "logout";
-  logout.onclick=function(){
+  logout.onclick = function () {
     currentPage = "login";
     document.body.innerHTML = "";
-    alldata =[]
-    datatable=[]
-    slot_for_homework.innerHTML=""  
-    slot_for_timetable.innerHTML=""
-    slot_for_navbar.innerHTML=""
+    alldata = []
+    datatable = []
+    slot_for_homework.innerHTML = ""
+    slot_for_timetable.innerHTML = ""
+    slot_for_navbar.innerHTML = ""
     initLogin();
-  } 
+  }
   div.appendChild(label);
   div.appendChild(hello);
   div.appendChild(name);
@@ -78,7 +78,7 @@ async function createnavbar(uid){
   slot_for_navbar.appendChild(div)
 }
 
-function initNavbar(u){
+function initNavbar(u) {
   createnavbar(u)
   document.body.appendChild(slot_for_navbar);
 }
@@ -118,7 +118,7 @@ function createbuttonforhw(uid) {
   };
   slot_for_homework.appendChild(button);
 }
-async function createtableforhw(uid) {  
+async function createtableforhw(uid) {
   let table = document.createElement("table");
   table.id = "main-table";
   let thead = document.createElement("thead");
@@ -138,10 +138,9 @@ async function createtableforhw(uid) {
   thead.appendChild(row);
   table.appendChild(thead);
 
-  const hw_ref = collection(db,`users/${uid}/homework`);
+  const hw_ref = collection(db, `users/${uid}/homework`);
   const hw = await getDocs(hw_ref);
   hw.docs.forEach(e => {
-    //console.log(e.data());
     alldata.push({
       title: e.data().work,
       senddate: e.data().date,
@@ -159,8 +158,8 @@ async function createtableforhw(uid) {
     let d4 = document.createElement("td");
     r.id = alldata[i].id;
 
-    let finishbutton = createfinishbuttonforhw(i,uid,r.id);
-    let removebutton = createremovebuttonforhw(i,uid,r.id);
+    let finishbutton = createfinishbuttonforhw(i, uid, r.id);
+    let removebutton = createremovebuttonforhw(i, uid, r.id);
 
     d1.innerText = "" + alldata[i].title;
     d2.innerText = "" + alldata[i].senddate;
@@ -183,45 +182,28 @@ async function createtableforhw(uid) {
 }
 
 function initworkforhw(uid) {
-  //push homework data to alldata
-  // const hw_ref = collection(db,`users/${uid}/homework`);
-  // const hw = await getDocs(hw_ref);
-  // hw.docs.forEach(e => {
-  //   //console.log(e.data());
-  //   alldata.push({
-  //     title: e.data().work,
-  //     senddate: e.data().date,
-  //     isfinish: e.data().isFinish,
-  //   });
-  // })
   createheadforhw();
   createinputforhw();
   createbuttonforhw(uid);
-  createtableforhw(uid);  
+  createtableforhw(uid);
   document.body.appendChild(slot_for_homework);
   //resettableforhw(uid)
 }
 async function additemforhw(uid) {
-  const hw_ref = collection(db,`users/${uid}/homework`);
+  const hw_ref = collection(db, `users/${uid}/homework`);
   var title = document.getElementById("title");
   var senddate = document.getElementById("senddate");
   if (senddate.value.length == 0 || title.value.length == 0) {
     alert("please insert title and date");
     return;
   }
-// alldata.push({
-  //   title: title.value,
-  //   senddate: senddate.value,
-  //   isfinish: false,
-  // });
-  addDoc(hw_ref,{
-    work : title.value,
-    date : senddate.value,
-    isFinish : false
+  addDoc(hw_ref, {
+    work: title.value,
+    date: senddate.value,
+    isFinish: false
   })
   title.value = "";
   alldata = [];
-  //sortdataforhw();
   resettableforhw(uid);
 }
 function resettableforhw(uid) {
@@ -247,7 +229,7 @@ function sortdataforhw() {
   });
 }
 
-function createfinishbuttonforhw(idx,uid,rid) {
+function createfinishbuttonforhw(idx, uid, rid) {
   let checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.className = "isfinishcheckbox";
@@ -255,23 +237,22 @@ function createfinishbuttonforhw(idx,uid,rid) {
   checkbox.onclick = async function () {
     alldata[parseInt(checkbox.id)].isfinish =
       !alldata[parseInt(checkbox.id)].isfinish;
-    const ref = doc(db,`users/${uid}/homework/${rid}`);
-    await updateDoc(ref,{
-      isFinish : alldata[parseInt(checkbox.id)].isfinish
+    const ref = doc(db, `users/${uid}/homework/${rid}`);
+    await updateDoc(ref, {
+      isFinish: alldata[parseInt(checkbox.id)].isfinish
     })
-    //sortdataforhw();
     alldata = [];
     resettableforhw(uid);
   };
   return checkbox;
 }
-function createremovebuttonforhw(idx,uid,rid) {
+function createremovebuttonforhw(idx, uid, rid) {
   let removebutton = document.createElement("button");
   removebutton.innerText = "Bin";
   removebutton.value = idx;
   removebutton.className = "binbutton";
   removebutton.onclick = async function () {
-    const ref = doc(db,`users/${uid}/homework/${rid}`)
+    const ref = doc(db, `users/${uid}/homework/${rid}`)
     await deleteDoc(ref)
     alldata.splice(removebutton.value, 1);
     var row = this.parentNode.parentNode;
@@ -283,7 +264,7 @@ function createremovebuttonforhw(idx,uid,rid) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 let slot_for_timetable = document.createElement("div");
-slot_for_timetable.id="slot_for_timetable"
+slot_for_timetable.id = "slot_for_timetable"
 var datatable = [];
 const alldays = ["MON", "TUE", "WED", "THU", "FRI"];
 const Ltime = [
@@ -416,10 +397,9 @@ async function gentable(uid) {
 
   datatable = []
 
-  const tb_ref = collection(db,`users/${uid}/timetable`);
+  const tb_ref = collection(db, `users/${uid}/timetable`);
   const tb = await getDocs(tb_ref);
   tb.docs.forEach(e => {
-    //console.log(e.data());
     datatable.push({
       subject: e.data().subject,
       days: e.data().day,
@@ -436,7 +416,7 @@ async function gentable(uid) {
     let row = document.createElement("tr");
     let dayname = document.createElement("td");
     dayname.innerText = alldays[i - 1];
-    dayname.id=alldays[i-1]
+    dayname.id = alldays[i - 1]
     row.appendChild(dayname);
     while (counter <= Ltime.length) {
       let cell_i = document.createElement("td");
@@ -451,14 +431,11 @@ async function gentable(uid) {
         cell_i.value = used;
         counter += datatable[used].end - datatable[used].start;
         cell_i.className = "used";
-        cell_i.id = alldays[i-1];
-        //console.log(used)
+        cell_i.id = alldays[i - 1];
         const idc = datatable[used].id
         cell_i.onclick = async function () {
-          const ref = doc(db,`users/${uid}/timetable/${idc}`)
+          const ref = doc(db, `users/${uid}/timetable/${idc}`)
           await deleteDoc(ref)
-          //datatable.splice(cell_i.value, 1);
-          //datatable = [];
           resettable(uid);
         };
         used++;
@@ -489,25 +466,14 @@ async function additem(uid) {
     alert("already used");
     return;
   }
-  // console.log(typeof start.value);
-  // console.log(subject.value)
-  // console.log(days.value)
-  // console.log(start.value)
-  // datatable.push({
-  //   subject: subject.value,
-  //   days: days.value,
-  //   start: start.value,
-  //   end: end.value,
-  // });
-  const tb_ref = collection(db,`users/${uid}/timetable`);
-  addDoc(tb_ref,{
+  const tb_ref = collection(db, `users/${uid}/timetable`);
+  addDoc(tb_ref, {
     subject: subject.value,
     day: days.value,
     start: start.value,
     end: end.value
   })
-  subject.value=""
-  //datatable = [];
+  subject.value = ""
   sortdata();
   resettable(uid);
 }
@@ -545,7 +511,6 @@ function initforTT(u) {
   createinputforTT(u);
   gentable(u);
   document.body.appendChild(slot_for_timetable);
-  //resettable()
 }
 
 function init(u) {
@@ -610,38 +575,38 @@ async function createFormForRegister() {
   regBtn.type = "submit";
   regBtn.value = "REGISTER";
   regBtn.style.cursor = "pointer";
-  regBtn.onclick = function() {
-    if(fName.value== "" || lName.value== "" || userReg.value == "" || passReg.value == ""){
+  regBtn.onclick = function () {
+    if (fName.value == "" || lName.value == "" || userReg.value == "" || passReg.value == "") {
 
     }
-    else{
-      addDoc(users_ref,{
-        firstName : fName.value,
-        lastName : lName.value,
+    else {
+      addDoc(users_ref, {
+        firstName: fName.value,
+        lastName: lName.value,
         user: userReg.value,
         pass: passReg.value
       })
-      
+
       currentPage = "login";
-      fName.value=""
-      lName.value=""
-      userReg.value=""
-      passReg.value= ""
+      fName.value = ""
+      lName.value = ""
+      userReg.value = ""
+      passReg.value = ""
       document.body.innerHTML = "";
       initLogin();
 
     }
-    
+
   }
 
   formReg.appendChild(regBtn);
   let backlogin = document.createElement("p");
   backlogin.innerText = "back to login";
   backlogin.style.cursor = "pointer"
-  backlogin.onclick = function() {
-      currentPage = "login"
-      document.body.innerHTML = ""
-      initLogin()
+  backlogin.onclick = function () {
+    currentPage = "login"
+    document.body.innerHTML = ""
+    initLogin()
   }
   formReg.appendChild(backlogin)
 
@@ -650,10 +615,10 @@ async function createFormForRegister() {
 }
 createHeadForRegister()
 createFormForRegister()
-function initReg(){
-  
-    document.body.appendChild(slot_for_register)
-  }
+function initReg() {
+
+  document.body.appendChild(slot_for_register)
+}
 // -------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------
 
@@ -667,15 +632,6 @@ function createHeadForLogin() {
   head.id = "headLogin";
   slot_for_login.appendChild(head);
 }
-
-// function loginClick() {
-//   var x = document.getElementById("password");
-//   if (x.type === "password") {
-//     x.type = "text";
-//   } else {
-//     x.type = "password";
-//   }
-// }
 
 function createFormForLogin() {
   let form = document.createElement("form");
@@ -759,10 +715,10 @@ function createFormForLogin() {
   let reg = document.createElement("p");
   reg.innerText = "register";
   reg.style.cursor = "pointer"
-  reg.onclick = function() {
-      currentPage = "register"
-      document.body.innerHTML = ""
-      initReg()
+  reg.onclick = function () {
+    currentPage = "register"
+    document.body.innerHTML = ""
+    initReg()
   }
   form.appendChild(reg);
   slot_for_login.appendChild(form);
@@ -771,27 +727,16 @@ function createFormForLogin() {
 createHeadForLogin();
 createFormForLogin();
 function initLogin() {
-  
+
   document.body.appendChild(slot_for_login);
 }
 
-if(currentPage=="login"){
+if (currentPage == "login") {
   initLogin();
   start = false;
 }
 
-if(currentPage=="main"){
+if (currentPage == "main") {
   init();
 }
-// if(start){
-//   if (currentPage === "login") {
-//     initLogin();
-//   } else if (currentPage === "main") {
-//     init();
-//   }
-//   else{
-//       initReg();
-//   }
-//   start = false;
-// }
 
