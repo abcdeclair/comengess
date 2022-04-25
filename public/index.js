@@ -524,6 +524,13 @@ function init(u) {
 let slot_for_register = document.createElement("div");
 slot_for_register.id = "registerbox";
 
+function createLogoforReg(){
+  let logo = document.createElement("img");
+  logo.src = "tabwork-logo.png";
+  logo.id = "logo";
+  slot_for_register.appendChild(logo);
+}
+
 function createHeadForRegister() {
   let headReg = document.createElement("h2");
   headReg.id = "headReg";
@@ -580,20 +587,33 @@ async function createFormForRegister() {
 
     }
     else {
-      addDoc(users_ref, {
-        firstName: fName.value,
-        lastName: lName.value,
-        user: userReg.value,
-        pass: passReg.value
-      })
-
+      var isValid = false;
+      if (users) {
+        users.docs.forEach((element) => {
+          if (
+            userReg.value == element.data().user
+          ) {
+            isValid = true;
+          }
+        });
+      }
+      if(isValid){
+        window.alert("This username is already in use.")
+      }else{
+        addDoc(users_ref, {
+          firstName: fName.value,
+          lastName: lName.value,
+          user: userReg.value,
+          pass: passReg.value
+        })
+        document.body.innerHTML = "";
+        initLogin();
+      }
       currentPage = "login";
       fName.value = ""
       lName.value = ""
       userReg.value = ""
       passReg.value = ""
-      document.body.innerHTML = "";
-      initLogin();
 
     }
 
@@ -613,7 +633,8 @@ async function createFormForRegister() {
   slot_for_register.appendChild(formReg)
 
 }
-createHeadForRegister()
+createLogoforReg()
+//createHeadForRegister()
 createFormForRegister()
 function initReg() {
 
@@ -625,6 +646,13 @@ function initReg() {
 //login page
 let slot_for_login = document.createElement("div");
 slot_for_login.id = "loginbox";
+
+function createLogo(){
+  let logo = document.createElement("img");
+  logo.src = "tabwork-logo.png";
+  logo.id = "logo";
+  slot_for_login.appendChild(logo);
+}
 
 function createHeadForLogin() {
   let head = document.createElement("h2");
@@ -724,7 +752,8 @@ function createFormForLogin() {
   slot_for_login.appendChild(form);
 }
 
-createHeadForLogin();
+createLogo()
+//createHeadForLogin();
 createFormForLogin();
 function initLogin() {
 
