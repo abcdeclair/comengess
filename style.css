@@ -6,7 +6,7 @@ body {
     background-color: #ded8d9;
     font-family: Bai Jamjuree;
     color: #2b3e51;
-    text-align: center;
+    
   }
 
 h2 {
@@ -14,43 +14,52 @@ h2 {
 }
 
 #navbar{
-  background-color: #ff6b84;
+  background-color: #f79797;
   font-family: Bai Jamjuree;
   color: #2b3e51;
-  padding: 10,10,10,10;
+  padding-top: 7px;
+  text-align: center;
+  box-shadow: 0px 5px 5px 0px rgba(214, 159, 159, 0.426);
+  
 }
 
 #tabwork{
   font-family: Bai Jamjuree;
   color: #2b3e51;
-  text-align: left;
-  font-size: 2cm;
+  
+
+  font-weight: 700;
+  color:rgb(252, 252, 252);
+  margin-right: 48%;
+  font-size: 36px;
 }
 
 #hello{
   font-family: Bai Jamjuree;
-  color: #2b3e51;
-  font-size: 1cm;
-  text-align: right;
+  color: #fff;
+  font-size: 22px;
+  
 }
 
 #name{
   font-family: Bai Jamjuree;
-  color: #2b3e51;
-  font-size: 1cm;
+  color: #fff;
+  font-size: 22px;
   text-align: right;
 }
 
 #logout{
-  background-color: #f29e9e;
-  border-radius: 10px; 
+  background-color: #fdf3f3;
+  border-radius: 5px; 
+  margin-left: 20px;
+  height: 40px;
+  width: 100px;
   border: none;
-  color: rgb(252, 252, 252);
-  padding: 15px 32px;
-  text-align: right;
+  color:#fe959c;
+  margin-bottom: 10px;
   text-decoration: none;
   display: inline-block;
-  font-size: 32px; 
+  font-size: 20px; 
 }
 
 #tabdiv{

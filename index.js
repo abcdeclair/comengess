@@ -62,7 +62,7 @@ function createnavbar(){
   div.id = "navbar";
   let label = document.createElement("paragraph");
   label.id = "tabwork";
-  label.innerText = "TabWork";
+  label.innerText = "TABWORK";
   let hello = document.createElement("paragraph");
   hello.id = "hello";
   hello.innerText = "HELLO -->"
