@@ -35,21 +35,6 @@ const db = getFirestore();
 const users_ref = collection(db, "users");
 const users = await getDocs(users_ref);
 
-// const items = await getDocs(users_ref);
-// let i;
-// items.docs.forEach(element => {
-//   console.log(element.data());
-//   i = element.id;
-// });
-// const hw1_ref = collection(db,`users/${i}/homework`);
-// const hw1 = await getDocs(hw1_ref);
-// console.log(hw1)
-// hw1.docs.forEach(e => {
-//   console.log(e.data());
-// })
-
-//let form = document.querySelector('#loginForm');
-
 // main page
 
 var currentPage = "login";
@@ -57,7 +42,11 @@ var start = true;
 var alldata = [];
 let slot_for_homework = document.createElement("div");
 slot_for_homework.id="slot_for_homework"
-function createnavbar(){
+let slot_for_navbar = document.createElement("div");
+slot_for_navbar.id="slot_for_navbar"
+async function createnavbar(uid){
+  const user_ref = doc(db,`users/${uid}`);
+  const user = await getDoc(user_ref)
   let div = document.createElement("div");
   div.id = "navbar";
   let label = document.createElement("paragraph");
@@ -65,10 +54,10 @@ function createnavbar(){
   label.innerText = "TabWork";
   let hello = document.createElement("paragraph");
   hello.id = "hello";
-  hello.innerText = "HELLO -->"
+  hello.innerText = "HELLO --> "
   let name = document.createElement("paragraph");
   name.id = "name";
-  name.innerText = "jack";
+  name.innerText = user.data().firstName;
   let logout = document.createElement("button");
   logout.id = "logout";
   logout.innerText = "logout";
@@ -79,14 +68,19 @@ function createnavbar(){
     datatable=[]
     slot_for_homework.innerHTML=""  
     slot_for_timetable.innerHTML=""
+    slot_for_navbar.innerHTML=""
     initLogin();
   } 
   div.appendChild(label);
   div.appendChild(hello);
   div.appendChild(name);
   div.appendChild(logout);
-  document.body.appendChild(div);
+  slot_for_navbar.appendChild(div)
+}
 
+function initNavbar(u){
+  createnavbar(u)
+  document.body.appendChild(slot_for_navbar);
 }
 
 function createheadforhw() {
@@ -555,7 +549,7 @@ function initforTT(u) {
 }
 
 function init(u) {
-  createnavbar();
+  initNavbar(u);
   initforTT(u);
   initworkforhw(u);
 }
