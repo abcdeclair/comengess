@@ -40,7 +40,7 @@ h2 {
   font-family: Bai Jamjuree;
   color: #fff;
   font-size: 22px;
-  
+  margin-right: 5px;
 }
 
 #name{
@@ -48,6 +48,7 @@ h2 {
   color: #fff;
   font-size: 22px;
   text-align: right;
+  margin-right: 10px;
 }
 
 #logout{

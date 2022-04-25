@@ -54,7 +54,7 @@ async function createnavbar(uid){
   label.innerText = "TabWork";
   let hello = document.createElement("paragraph");
   hello.id = "hello";
-  hello.innerText = "HELLO --> "
+  hello.innerText = "HELLO "
   let name = document.createElement("paragraph");
   name.id = "name";
   name.innerText = user.data().firstName;
