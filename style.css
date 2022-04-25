@@ -12,7 +12,9 @@ body {
 h2 {
     font-size: 40px;
 }
-
+#slot_for_homework,#slot_for_timetable{
+  text-align: center;
+}
 #navbar{
   background-color: #f79797;
   font-family: Bai Jamjuree;

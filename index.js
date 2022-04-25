@@ -62,7 +62,7 @@ function createnavbar(){
   div.id = "navbar";
   let label = document.createElement("paragraph");
   label.id = "tabwork";
-  label.innerText = "TABWORK";
+  label.innerText = "TabWork";
   let hello = document.createElement("paragraph");
   hello.id = "hello";
   hello.innerText = "HELLO -->"
@@ -80,7 +80,7 @@ function createnavbar(){
     slot_for_homework.innerHTML=""  
     slot_for_timetable.innerHTML=""
     initLogin();
-  }
+  } 
   div.appendChild(label);
   div.appendChild(hello);
   div.appendChild(name);
