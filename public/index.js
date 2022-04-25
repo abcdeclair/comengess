@@ -149,7 +149,7 @@ async function createtableforhw(uid) {
     });
   })
   sortdataforhw();
-  console.log(alldata)
+  //console.log(alldata)
   for (let i = 0; i < alldata.length; i++) {
     let r = document.createElement("tr");
     let d1 = document.createElement("td");
@@ -702,7 +702,7 @@ function createFormForLogin() {
     } else if (isTrue) {
       username.value = "";
       password.value = "";
-      window.alert("รหัสถูกต้อง");
+      //window.alert("รหัสถูกต้อง");
       document.body.innerHTML = "";
       init(user_id);
       currentPage = "main";
